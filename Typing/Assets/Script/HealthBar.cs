@@ -21,6 +21,9 @@ public class HealthBar : MonoBehaviour {
         {
             healthBar.fillAmount = Mathf.Lerp(healthBar.fillAmount, Global.health / 100f, Time.deltaTime * speed);
 
+            if (Global.health <= 0)
+                healthBar.fillAmount = 0;
+
             if (Global.health <= 30)
                 healthBar.color = Color.red;
             else
@@ -28,6 +31,10 @@ public class HealthBar : MonoBehaviour {
         }
         else
         {
+
+            if (Global.bossHealth <= 0)
+                healthBar.fillAmount = 0;
+
             float hello = Global.bossHealth / Global.maxBossHealth;
             healthBar.fillAmount = Mathf.Lerp(healthBar.fillAmount, hello, Time.deltaTime * speed);
 

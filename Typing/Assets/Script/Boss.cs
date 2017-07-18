@@ -10,6 +10,10 @@ public class Boss : MonoBehaviour {
     [SerializeField]
     Text text;
 
+    [SerializeField]
+    SentenceGenerator sentences;
+
+
     bool changeState;
     enum States
     {
@@ -24,6 +28,8 @@ public class Boss : MonoBehaviour {
 
     [SerializeField]
     Text bossHealth;
+
+    float aa = 10;
 
     GameObject fireballSpawn;
 
@@ -53,74 +59,92 @@ public class Boss : MonoBehaviour {
         return V;
     }
     // Update is called once per frame
-    void Update () {
+    void Update()
+    {
+            Debug.Log(aa -= Time.fixedDeltaTime);
+            if (Global.bossHealth <= 0)
+            {
+                Global.bossHealth = 0;
+                text.text = "";
+            }
+            bossHealth.text = "Boss Health: " + Global.bossHealth.ToString();
+            timer -= Time.deltaTime;
+            if (timer <= 0)
+            {
+                state = GetRandomEnum<States>();
 
-        if (Global.bossHealth <= 0)
-        {
-            Global.bossHealth = 0;
-            text.text = "";
-        }
-        bossHealth.text = "Boss Health: " + Global.bossHealth.ToString();
-        timer -= Time.deltaTime;
-        if(timer <= 0)
-        {
-            state = GetRandomEnum<States>();
-            timer = 5;
+            if (Global.difficultyLevel < 2)
+                timer = 5;
+
+            else if (Global.difficultyLevel >= 2 && Global.difficultyLevel < 3)
+                timer = 3;
+            else
+                timer = 3;
             smaller = false;
-        }
-        if(state == States.SpawnWord)
-        {
-            Debug.Log(ListOFWords.bossWords.Count);
-            if (ListOFWords.bossWords.Count > 0 && text.text == "")
-            {
-                int random = Random.Range(0, ListOFWords.bossWords.Count);
-                string randomText = ListOFWords.bossWords[random];
-                Debug.Log(randomText);
-                text.text = randomText;
-                state = States.Idle;
             }
-            if (text.text != "")
-            {
-                state = States.Idle;
-            }
-        }
-        if (state == States.Idle)
-        {
-            anim.speed = 1;
 
-            if (timer >= 5)
-                timer = 1;
-        }
-        if (state == States.Attack)
-        {
-            if (!changeState)
+            if (state == States.SpawnWord)
             {
-                changeState = true;
+                Debug.Log(ListOFWords.bossWords.Count);
+                if (ListOFWords.bossWords.Count > 0 && text.text == "")
+                {
+                string randomText;
+                if (Global.difficultyLevel < 2)
+                {
+                    int random = Random.Range(0, ListOFWords.bossWords.Count);
+                    randomText = ListOFWords.bossWords[random];
+                }
+                else
+                {
+                    sentences.RandomSentence();
+                    randomText = sentences.ReturnSentence();
+                }
+                    Debug.Log(randomText);
+                    text.text = randomText;
+                    state = States.Idle;
+                }
+                if (text.text != "")
+                {
+                    state = States.Idle;
+                }
             }
-        }
-        if (changeState && !smaller)
-        {
-            transform.localScale += new Vector3(1, 1, 1) * Time.deltaTime * 3;
-
-            if (transform.localScale.x >= 3)
+            if (state == States.Idle)
             {
-                smaller = true;
-                GameObject germSpawned = Instantiate(Resources.Load("Fireball")) as GameObject;
-                germSpawned.transform.SetParent(canvas.transform);
-                Vector3 screenPosition = new Vector3(Random.Range(fireballSpawn.GetComponent<BoxCollider2D>().bounds.min.x, fireballSpawn.GetComponent<BoxCollider2D>().bounds.max.x), Random.Range(Screen.height / 2 -50, Screen.height / 2 + 10), 0);
-                germSpawned.transform.localPosition = screenPosition;
-                germSpawned.transform.localRotation = Quaternion.identity;
-                germSpawned.transform.localScale = new Vector3(1, 1, 1);
                 anim.speed = 1;
+
+                if (timer >= 5)
+                    timer = 1;
             }
-        }
-        if (smaller && transform.localScale.x >= 2)
-        {
-            transform.localScale -= new Vector3(1, 1, 1) * Time.deltaTime * 3;
-            if (transform.localScale.x <= 3)
+            if (state == States.Attack)
             {
-                changeState = false;
+                if (!changeState)
+                {
+                    changeState = true;
+                }
             }
-        }
+            if (changeState && !smaller)
+            {
+                transform.localScale += new Vector3(1, 1, 1) * Time.deltaTime * 3;
+
+                if (transform.localScale.x >= 3)
+                {
+                    smaller = true;
+                    GameObject germSpawned = Instantiate(Resources.Load("Fireball")) as GameObject;
+                    germSpawned.transform.SetParent(canvas.transform);
+                    Vector3 screenPosition = new Vector3(Random.Range(fireballSpawn.GetComponent<BoxCollider2D>().bounds.min.x, fireballSpawn.GetComponent<BoxCollider2D>().bounds.max.x), Random.Range(Screen.height / 2 - 50, Screen.height / 2 + 10), 0);
+                    germSpawned.transform.localPosition = screenPosition;
+                    germSpawned.transform.localRotation = Quaternion.identity;
+                    germSpawned.transform.localScale = new Vector3(1, 1, 1);
+                    anim.speed = 1;
+                }
+            }
+            if (smaller && transform.localScale.x >= 2)
+            {
+                transform.localScale -= new Vector3(1, 1, 1) * Time.deltaTime * 3;
+                if (transform.localScale.x <= 3)
+                {
+                    changeState = false;
+                }
+            }
     }
 }

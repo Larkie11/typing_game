@@ -84,9 +84,11 @@
     <Compile Include="Assets\Script\RandomWord.cs" />
     <Compile Include="Assets\Script\SafetyLine.cs" />
     <Compile Include="Assets\Script\SelfRandom.cs" />
+    <Compile Include="Assets\Script\SentenceGenerator.cs" />
     <Compile Include="Assets\Script\SetGame.cs" />
     <Compile Include="Assets\Script\SetScreen.cs" />
     <Compile Include="Assets\Script\SetVolume.cs" />
+    <Compile Include="Assets\Script\ShowSentence.cs" />
     <Compile Include="Assets\Script\Won.cs" />
     <Compile Include="Assets\Script\WordCheck.cs" />
   </ItemGroup>
@@ -170,6 +172,9 @@
     <None Include="Assets\Standard Assets\ParticleSystems\Shaders\PriorityParticleAddSoft.shader" />
     <None Include="Assets\Standard Assets\ParticleSystems\Shaders\PriorityParticleAlpha.shader" />
     <None Include="Assets\StreamingAssets\English.txt" />
+    <None Include="Assets\StreamingAssets\adverbs1.txt" />
+    <None Include="Assets\StreamingAssets\starter1.txt" />
+    <None Include="Assets\StreamingAssets\verbs1.txt" />
     <None Include="Assets\Wispy Sky\ReadMe.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

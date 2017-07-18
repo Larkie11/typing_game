@@ -21,6 +21,7 @@ public class Global : MonoBehaviour {
     public static bool readFile = false;
     public static bool allowUpperCase = false;
     public static int numberOfMonsters;
+    public static bool showingSentence = false;
 	// Use this for initialization
 	private void Awake () {
         wordsCleared = 0;

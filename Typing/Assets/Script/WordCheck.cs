@@ -13,7 +13,11 @@ public class WordCheck : MonoBehaviour {
     InputField input; string test2 = "";
     GameObject[] objects;
     GameObject[] bossText;
-   
+
+
+    [SerializeField]
+    SentenceGenerator sentences;
+
     [SerializeField]
     GameObject defeatCanvas;
     Canvas defeatC;
@@ -393,7 +397,7 @@ public class WordCheck : MonoBehaviour {
                 }
                 if (trigger)
                 {
-                    timer -= Time.deltaTime;
+                    timer -= Time.fixedDeltaTime;
                     o.GetComponentInChildren<Text>().color = Color.blue;
                     Global.wordsCleared--;
 
@@ -403,7 +407,8 @@ public class WordCheck : MonoBehaviour {
                         Global.bossHealth -= 20;
                         trigger = false;
                         input.text = "";
-                        timer = 0.3f;
+                        timer = 0.1f;
+                        Global.health += 10;
                     }
                 }
             }

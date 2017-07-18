@@ -200,6 +200,9 @@
     <None Include="Assets\Standard Assets\ParticleSystems\Shaders\PriorityParticleAddSoft.shader" />
     <None Include="Assets\Standard Assets\ParticleSystems\Shaders\PriorityParticleAlpha.shader" />
     <None Include="Assets\StreamingAssets\English.txt" />
+    <None Include="Assets\StreamingAssets\adverbs1.txt" />
+    <None Include="Assets\StreamingAssets\starter1.txt" />
+    <None Include="Assets\StreamingAssets\verbs1.txt" />
     <None Include="Assets\Wispy Sky\ReadMe.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
