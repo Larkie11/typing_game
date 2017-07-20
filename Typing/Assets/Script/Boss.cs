@@ -67,7 +67,7 @@ public class Boss : MonoBehaviour {
                 Global.bossHealth = 0;
                 text.text = "";
             }
-            bossHealth.text = "Boss Health: " + Global.bossHealth.ToString();
+            bossHealth.text = Global.bossHealth.ToString();
             timer -= Time.deltaTime;
             if (timer <= 0)
             {
