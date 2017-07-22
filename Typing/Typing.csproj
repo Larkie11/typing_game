@@ -71,6 +71,7 @@
   <ItemGroup>
     <Compile Include="Assets\Script\Boss.cs" />
     <Compile Include="Assets\Script\Defeated.cs" />
+    <Compile Include="Assets\Script\Enemy.cs" />
     <Compile Include="Assets\Script\Fireball.cs" />
     <Compile Include="Assets\Script\GetVolume.cs" />
     <Compile Include="Assets\Script\Global.cs" />
@@ -81,7 +82,6 @@
     <Compile Include="Assets\Script\ListOFWords.cs" />
     <Compile Include="Assets\Script\MenuCam.cs" />
     <Compile Include="Assets\Script\PauseGame.cs" />
-    <Compile Include="Assets\Script\RandomWord.cs" />
     <Compile Include="Assets\Script\SafetyLine.cs" />
     <Compile Include="Assets\Script\SelfRandom.cs" />
     <Compile Include="Assets\Script\SentenceGenerator.cs" />
