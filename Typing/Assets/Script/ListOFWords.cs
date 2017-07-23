@@ -10,7 +10,6 @@ public class ListOFWords : MonoBehaviour {
     public static List<string> bossWords = new List<string>();
     public static List<string> loadedWords = new List<string>();
     int lowestWordCount = 0;
-    int highestWordCount = 0;
 
     // Use this for initialization
     void Start()
@@ -47,7 +46,6 @@ public class ListOFWords : MonoBehaviour {
 
         Regex r = new Regex("^[a-zA-Z0-9]*$");
         lowestWordCount = loadedWords[0].Length;
-        highestWordCount = loadedWords[0].Length;
  
         foreach (string word in loadedWords)
         {

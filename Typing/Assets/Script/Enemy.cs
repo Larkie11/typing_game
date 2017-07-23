@@ -14,6 +14,8 @@ public class Enemy : MonoBehaviour {
     float speed;
     bool died;
     bool collided;
+    bool grounded;
+    SurfaceEffector2D sf2;
     // Use this for initialization
     void Start() {
         died = false;
@@ -51,12 +53,35 @@ public class Enemy : MonoBehaviour {
             if (collision.gameObject.tag == "Safety")
             collided = true;
         }
+        if (collision.gameObject.tag == "SpawnPlatform")
+            grounded = true;
+        else
+            grounded = false;
+    }
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        Debug.Log(collision.gameObject.tag);
+        if (collision.gameObject.tag == "SpawnPlatform")
+            grounded = true;
+        else
+            grounded = false;
+
+        if (collision.gameObject.tag == "conveyer")
+            sf2 = collision.gameObject.GetComponent<SurfaceEffector2D>();
     }
     // Update is called once per frame
     void Update () {
-        transform.position = Vector3.MoveTowards(transform.position, player.transform.position, speed * Time.deltaTime);
 
-        if(collided)
+        if (sf2 != null)
+        {
+            if ( sf2.speed > 0)
+                gameObject.GetComponent<SpriteRenderer>().flipX = false;
+            else
+                gameObject.GetComponent<SpriteRenderer>().flipX = true;
+        }
+        // transform.position = Vector3.MoveTowards(transform.position, player.transform.position, speed * Time.deltaTime);
+
+        if (collided)
         {
             transform.localScale -= new Vector3(1, 1, 1) * Time.deltaTime * 10;
             if (transform.localScale.x <= 0)

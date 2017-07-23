@@ -16,7 +16,6 @@ public class HealthBar : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        Debug.Log(Global.health / 100f);
         if (bossOrPlayer == "player")
         {
             healthBar.fillAmount = Mathf.Lerp(healthBar.fillAmount, Global.health / 100f, Time.deltaTime * speed);

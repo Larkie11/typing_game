@@ -10,7 +10,7 @@ public class WordCheck : MonoBehaviour {
 
     public Text textAutocomplete;
     [SerializeField]
-    InputField input; string test2 = "";
+    InputField input;
     GameObject[] objects;
     GameObject[] bossText;
 
@@ -267,40 +267,37 @@ public class WordCheck : MonoBehaviour {
         else if (timertospawn <= 0 && Global.numberOfMonsters > 0 && waveStart <= -1)
         {
             if (Global.difficultyLevel < 2)
-                timertospawn = 3f;
+                timertospawn = Random.Range(2.5f,3f);
 
             else if (Global.difficultyLevel >= 2 && Global.difficultyLevel < 3)
-                timertospawn = 2f;
+                timertospawn = Random.Range(1.5f,2f);
 
             else
-                timertospawn = 1f;
+                timertospawn = Random.Range(1f, 1.3f);
             if (GoToScene.GetSceneName() != "3")
             {
                 int spawner = Random.Range(0, spawnPoints.Length);
                 Vector3 spawnLocation;
-                Debug.Log(spawnPoints[spawner].GetComponent<BoxCollider2D>().bounds.max.y + " " + spawnPoints[spawner].transform.position.y);
+                Debug.Log(spawnPoints[spawner].transform.position);
 
-                if (spawnPoints[spawner].transform.position.x > player.transform.position.x)
-                {
+                //if (spawnPoints[spawner].transform.position.x > 0)
 
-                    if (spawnPoints[spawner].transform.position.y < 0)
-                    {
-                        spawnLocation = new Vector3(spawnPoints[spawner].GetComponent<BoxCollider2D>().bounds.max.x * 2f, (-spawnPoints[spawner].transform.position.y) * 2 + spawnPoints[spawner].GetComponent<BoxCollider2D>().bounds.max.y * 2, 0);
+                //    xSpawn = spawnPoints[spawner].GetComponent<BoxCollider2D>().bounds.max.x * 2f;
 
-                    }
-                    else
-                        spawnLocation = new Vector3(spawnPoints[spawner].GetComponent<BoxCollider2D>().bounds.max.x * 2f, spawnPoints[spawner].transform.position.y * spawnPoints[spawner].GetComponent<BoxCollider2D>().bounds.max.y/4, 0);
-                }
-                else
-                {
+                //else
+                //    xSpawn = spawnPoints[spawner].GetComponent<BoxCollider2D>().bounds.min.x * 2f;
 
-                    if (spawnPoints[spawner].transform.position.y < 0)
-                    {
-                        spawnLocation = new Vector3(spawnPoints[spawner].GetComponent<BoxCollider2D>().bounds.min.x * 2f, (-spawnPoints[spawner].transform.position.y) * 2 + spawnPoints[spawner].GetComponent<BoxCollider2D>().bounds.max.y * 2, 0);
-                    }
-                    else
-                        spawnLocation = new Vector3(spawnPoints[spawner].GetComponent<BoxCollider2D>().bounds.min.x * 2f, spawnPoints[spawner].transform.position.y  * spawnPoints[spawner].GetComponent<BoxCollider2D>().bounds.max.y/4, 0);
-                }
+                //if (spawnPoints[spawner].gameObject.GetComponentInParent<RectTransform>().transform.position.y < 0)
+                //{
+                //    spawnLocation = new Vector3(xSpawn, -spawnPoints[spawner].transform.position.y + spawnPoints[spawner].GetComponent<BoxCollider2D>().size.y * 2, 0);
+
+                //}
+                //else
+                //    spawnLocation = new Vector3(xSpawn, spawnPoints[spawner].transform.position.y + 200f, 0);
+
+
+                spawnLocation = spawnPoints[spawner].transform.localPosition;
+
                 GameObject myRoadInstance =
                             Instantiate(Resources.Load(ToSpawn)) as GameObject;
 
