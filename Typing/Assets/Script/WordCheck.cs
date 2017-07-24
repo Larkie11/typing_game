@@ -14,6 +14,9 @@ public class WordCheck : MonoBehaviour {
     GameObject[] objects;
     GameObject[] bossText;
 
+    [SerializeField]
+    string[] monsterSpawn;
+
 
     [SerializeField]
     SentenceGenerator sentences;
@@ -298,10 +301,20 @@ public class WordCheck : MonoBehaviour {
 
                 spawnLocation = spawnPoints[spawner].transform.localPosition;
 
-                GameObject myRoadInstance =
-                            Instantiate(Resources.Load(ToSpawn)) as GameObject;
+                GameObject myRoadInstance;
+                if (monsterSpawn.Length <= 0)
+                {
+                    myRoadInstance =
+                                Instantiate(Resources.Load(ToSpawn)) as GameObject;
+                }
+                else
+                {
+                    myRoadInstance =
+                                   Instantiate(Resources.Load(monsterSpawn[Random.Range(0,monsterSpawn.Length)])) as GameObject;
+                }
 
-                myRoadInstance.transform.localPosition = spawnLocation;
+
+                    myRoadInstance.transform.localPosition = spawnLocation;
 
                 if (myRoadInstance.transform.position.x > player.transform.position.x)
                     myRoadInstance.GetComponent<SpriteRenderer>().flipX = true;

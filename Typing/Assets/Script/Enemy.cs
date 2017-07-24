@@ -9,6 +9,7 @@ public class Enemy : MonoBehaviour {
     AudioSource audio;
     [SerializeField]
     AudioClip dead;
+
     bool isPlaying;
     [SerializeField]
     float speed;
@@ -46,6 +47,7 @@ public class Enemy : MonoBehaviour {
     private void OnTriggerEnter2D(Collider2D collision)
     {
         Debug.Log(collision.gameObject.tag);
+        if (gameObject.GetComponentInChildren<Text>().text != "")
         Global.health -= 10;
         if (!died)
         {

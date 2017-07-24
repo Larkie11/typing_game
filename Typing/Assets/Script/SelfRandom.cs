@@ -5,7 +5,7 @@ using UnityEngine.UI;
 public class SelfRandom : MonoBehaviour {
 
     [SerializeField]
-    public Sprite[] backgroundSprites;
+    Sprite[] backgroundSprites;
 
     // Use this for initialization
     void Start () {
