@@ -1,6 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
 using UnityEngine.UI;
+using System.Text;
+using System.Text.RegularExpressions;
 
 public class Enemy : MonoBehaviour {
     Camera cam;
@@ -9,40 +11,58 @@ public class Enemy : MonoBehaviour {
     AudioSource audio;
     [SerializeField]
     AudioClip dead;
-
+    InputField input;
     bool isPlaying;
     [SerializeField]
     float speed;
     bool died;
     bool collided;
     bool grounded;
+    string test2;
+    string tempHolder;
     SurfaceEffector2D sf2;
+    Text enemyText;
+    Text child;
+    [SerializeField]
+    string clearTextColor;
+    string rtOpenTag = "";   //Rich text opening tag
+    string rtCloseTag = "</color></b>"; //Rich text closing tag
+
     // Use this for initialization
     void Start() {
         died = false;
+        rtOpenTag = "<b><color=" + clearTextColor + ">";
         cam = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>();
         player = GameObject.FindGameObjectWithTag("Player");
         anim = gameObject.GetComponent<Animator>();
         audio = GameObject.FindGameObjectWithTag("SFX").GetComponent<AudioSource>();
+        input = GameObject.FindGameObjectWithTag("Input").GetComponent<InputField>();
         speed = Random.Range(13, 20);
-        isPlaying = false;
-        collided = false;
+        child = transform.GetChild(0).GetComponentInChildren<Text>();
+        enemyText = transform.GetChild(0).GetChild(0).GetComponent<Text>();
+
         if (ListOFWords.words.Count > 0)
         {
             int random = Random.Range(0, ListOFWords.words.Count);
             string randomText = ListOFWords.words[random];
-            if (gameObject.GetComponentInChildren<Text>().text != randomText)
+            if (child.text != randomText)
             {
-                gameObject.GetComponentInChildren<Text>().text = randomText;
+                child.text = randomText;
+                enemyText.text = randomText;
             }
             ListOFWords.words.RemoveAt(random);
-            WordCheck.existingWords.Add(gameObject.GetComponentInChildren<Text>().text);
+            WordCheck.existingWords.Add(child.text);
         }
         foreach (string word in WordCheck.existingWords)
         {
             Debug.Log(word);
         }
-        gameObject.GetComponentInChildren<Text>().color = Color.white;
+        child.color = Color.white;
+        if (enemyText.text == "")
+            enemyText.text = child.text;
+        isPlaying = false;
+        collided = false;
+        tempHolder = enemyText.text;
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -73,6 +93,19 @@ public class Enemy : MonoBehaviour {
     }
     // Update is called once per frame
     void Update () {
+        Debug.Log(child.text);
+       
+        if (input.text != "" && child.text.StartsWith(input.text))
+        {
+            
+            string modified = tempHolder.Insert(input.text.Length, rtCloseTag);
+            test2 = modified.Insert(0, rtOpenTag);
+            Debug.Log(test2);
+            if (test2 != "" && test2 != enemyText.text)
+                enemyText.text = test2;
+        }
+        if (input.text == "")
+            enemyText.text = child.text;
 
         if (sf2 != null)
         {
@@ -82,6 +115,15 @@ public class Enemy : MonoBehaviour {
                 gameObject.GetComponent<SpriteRenderer>().flipX = true;
         }
         // transform.position = Vector3.MoveTowards(transform.position, player.transform.position, speed * Time.deltaTime);
+        //char a = gameObject.GetComponentInChildren<Text>().text[0];
+       
+        //for(int i = 0; i < input.text.Length; i++)
+        //{
+        //    if (input.text[i] == gameObject.GetComponentInChildren<Text>().text[i])
+        //    {
+        //        gameObject.GetComponentInChildren<Text>().text
+        //    }
+        //}
 
         if (collided)
         {
@@ -90,10 +132,10 @@ public class Enemy : MonoBehaviour {
             {
                 Destroy(gameObject);
             }
-            WordCheck.existingWords.Remove(gameObject.GetComponentInChildren<Text>().text);
-            gameObject.GetComponentInChildren<Text>().text = "";
+            WordCheck.existingWords.Remove(child.text);
+            child.text = "";
         }
-        if (gameObject.GetComponentInChildren<Text>().text == "")
+        if (child.text == "")
         {
             died = true;
             anim.SetInteger("State",1);
