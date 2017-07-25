@@ -206,6 +206,8 @@ public class WordCheck : MonoBehaviour {
             bossText = GameObject.FindGameObjectsWithTag("Boss");
 
         myText = input.text;
+
+        if(GoToScene.GetSceneName() != "3")
         AutoCompleteHint();
 
         scoreText.text = "Score: " + Global.score.ToString();

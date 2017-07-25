@@ -2,7 +2,7 @@
 using System.Collections;
 
 public class Global : MonoBehaviour {
-    public static float difficultyLevel = 2.0f;
+    public static float difficultyLevel = 3.0f;
     public static float easy1 = 1.0f;
     public static float easy2 = 1.1f;
     public static float easy3 = 1.2f;

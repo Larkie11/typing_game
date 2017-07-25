@@ -37,7 +37,6 @@ public class HealthBar : MonoBehaviour {
             float hello = Global.bossHealth / Global.maxBossHealth;
             healthBar.fillAmount = Mathf.Lerp(healthBar.fillAmount, hello, Time.deltaTime * speed);
 
-            Debug.Log(hello);
             if (Global.bossHealth <= Global.maxBossHealth/2)
                 healthBar.color = Color.red;
             else

@@ -26,12 +26,12 @@ public class Enemy : MonoBehaviour {
     [SerializeField]
     string clearTextColor;
     string rtOpenTag = "";   //Rich text opening tag
-    string rtCloseTag = "</color></b>"; //Rich text closing tag
+    string rtCloseTag = "</color>"; //Rich text closing tag
 
     // Use this for initialization
     void Start() {
         died = false;
-        rtOpenTag = "<b><color=" + clearTextColor + ">";
+        rtOpenTag = "<color=" + clearTextColor + ">";
         cam = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>();
         player = GameObject.FindGameObjectWithTag("Player");
         anim = gameObject.GetComponent<Animator>();

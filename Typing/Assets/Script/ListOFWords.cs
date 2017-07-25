@@ -20,8 +20,6 @@ public class ListOFWords : MonoBehaviour {
 
         if (Global.readFile == false)
         {
-            string path = "Assets/Resources/English.txt";
-
             using (StreamReader sr = new StreamReader(Application.streamingAssetsPath + "/English.txt"))
             {
                 string line; // this is the buffer for the content from your file
@@ -159,24 +157,18 @@ public class ListOFWords : MonoBehaviour {
                 }
                 if (GoToScene.GetSceneName() == "3")
                 {
+                    if (n >= 3 && n <= 4)
+                        bossWords.Add(word);
+
                     if (Global.allowSymbols)
                     {
                         if (!Global.allowUpperCase)
                         {
-                            if (word == word.ToLower())
-                            {
                                 words.Add(word);
                                 if (n >= 3 && n <= 4)
                                     bossWords.Add(word);
-                            }
-                            else
-                            {
-                                words.Add(word);
-                                if (n >= 3 && n <= 4)
-                                    bossWords.Add(word);
-                            }
                         }
-                        else
+                        else if (Global.allowUpperCase)
                         {
                             words.Add(word);
                             {
@@ -188,10 +180,9 @@ public class ListOFWords : MonoBehaviour {
                                 }
                                 words.Add(sb.ToString());
                             }
-                            if (n >= 3 && n <= 4)
-                                bossWords.Add(word);
+ 
                         }
-
+                       
                     }
                     else
                     {
@@ -199,12 +190,8 @@ public class ListOFWords : MonoBehaviour {
                         {
                             if (!Global.allowUpperCase)
                             {
-                                if (word == word.ToLower())
-                                {
-                                    words.Add(word);
-                                    if (n >= 3 && n <= 4)
-                                        bossWords.Add(word);
-                                }
+                                 words.Add(word);
+                                 
                             }
                             else
                             {
@@ -218,8 +205,6 @@ public class ListOFWords : MonoBehaviour {
                                     }
                                     words.Add(sb.ToString());
                                 }
-                                if (n >= 3 && n <= 4)
-                                    bossWords.Add(word);
                             }
                         }
                     }
@@ -236,10 +221,7 @@ public class ListOFWords : MonoBehaviour {
                         {
                             if (!Global.allowUpperCase)
                             {
-                                if (word == word.ToLower())
-                                {
-                                    words.Add(word);
-                                }
+                                 words.Add(word);
                             }
                             else
                             {
@@ -261,10 +243,8 @@ public class ListOFWords : MonoBehaviour {
                             {
                                 if (!Global.allowUpperCase)
                                 {
-                                    if (word == word.ToLower())
-                                    {
-                                        words.Add(word);
-                                    }
+                                   
+                                     words.Add(word);
                                 }
                                 else
                                 {
@@ -291,10 +271,8 @@ public class ListOFWords : MonoBehaviour {
                         {
                             if (!Global.allowUpperCase)
                             {
-                                if (word == word.ToLower())
-                                {
-                                    words.Add(word);
-                                }
+                             
+                                  words.Add(word);
                             }
                             else
                             {
@@ -316,10 +294,7 @@ public class ListOFWords : MonoBehaviour {
                             {
                                 if (!Global.allowUpperCase)
                                 {
-                                    if (word == word.ToLower())
-                                    {
-                                        words.Add(word);
-                                    }
+                                     words.Add(word);
                                 }
                                 else
                                 {
@@ -346,10 +321,7 @@ public class ListOFWords : MonoBehaviour {
                         {
                             if (!Global.allowUpperCase)
                             {
-                                if (word == word.ToLower())
-                                {
-                                    words.Add(word);
-                                }
+                                words.Add(word);
                             }
                             else
                             {
@@ -371,10 +343,7 @@ public class ListOFWords : MonoBehaviour {
                             {
                                 if (!Global.allowUpperCase)
                                 {
-                                    if (word == word.ToLower())
-                                    {
-                                        words.Add(word);
-                                    }
+                                     words.Add(word);
                                 }
                                 else
                                 {
@@ -511,7 +480,7 @@ public class ListOFWords : MonoBehaviour {
                 }
                 if (GoToScene.GetSceneName() == "3")
                 {
-                    if (n >= 5)
+                    if (n >= 6)
                     {
                         if (Global.allowSymbols)
                         {
@@ -546,6 +515,7 @@ public class ListOFWords : MonoBehaviour {
                                         words.Add(word);
                                     }
                                 }
+                                else
                                 {
                                     words.Add(word);
                                     {

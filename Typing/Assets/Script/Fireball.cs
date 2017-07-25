@@ -12,27 +12,39 @@ public class Fireball : MonoBehaviour {
     [SerializeField]
     AudioClip bossHurt;
     GameObject player;
+    
     bool playOnce;
     bool collided;
     int textCount;
     float moveSpeed;
-	void Start () {
+    Text clearText;
+    Text child;
+    InputField input;
+    string tempHolder;
+    string rtOpenTag = "<color=red>";   //Rich text opening tag
+    string rtCloseTag = "</color>"; //Rich text closing tag
+
+    void Start () {
+        child = transform.GetChild(0).GetComponentInChildren<Text>();
+        clearText = transform.GetChild(0).GetChild(0).GetComponent<Text>();
+
         if (ListOFWords.words.Count > 0)
         {
             int random = Random.Range(0, ListOFWords.words.Count);
             string randomText = ListOFWords.words[random];
             ListOFWords.words.Remove(randomText);
-            gameObject.GetComponentInChildren<Text>().text = randomText;
+            child.text = randomText;
+            clearText.text = tempHolder = randomText;
         }
         boss = GameObject.FindGameObjectWithTag("Boss");
         SFX = GameObject.FindGameObjectWithTag("SFX").GetComponent<AudioSource>();
         player = GameObject.FindGameObjectWithTag("Player");
+        input = GameObject.FindGameObjectWithTag("Input").GetComponent<InputField>();
 
         SFX.PlayOneShot(fire);
         playOnce = false;
         collided = false;
         textCount = gameObject.GetComponentInChildren<Text>().text.Length;
-
 
         if (Global.difficultyLevel < 2)
             moveSpeed = 10;
@@ -57,6 +69,18 @@ public class Fireball : MonoBehaviour {
     // Update is called once per frame
     void Update()
     {
+        Debug.Log(child.text);
+        if (input.text != "" && child.text.StartsWith(input.text))
+        { 
+            string modified = tempHolder.Insert(input.text.Length, rtCloseTag);
+            string test2 = modified.Insert(0, rtOpenTag);
+            Debug.Log(test2);
+            if (test2 != "" && test2 != clearText.text)
+                clearText.text = test2;
+        }
+        if (input.text == "")
+            clearText.text = child.text;
+
         if (collided)
         {
             transform.localScale -= new Vector3(1, 1, 1) * Time.deltaTime * 2;
@@ -70,7 +94,7 @@ public class Fireball : MonoBehaviour {
         {
             Destroy(gameObject);
         }
-        if (gameObject.GetComponentInChildren<Text>().text == "" && !collided)
+        if (child.text == "" && !collided)
         {
             transform.position = Vector3.MoveTowards(transform.position, boss.transform.position, 500 * Time.deltaTime);
             transform.localScale -= new Vector3(1, 1, 1) * Time.deltaTime * 1;
