@@ -72,6 +72,7 @@
     <Compile Include="Assets\Script\Boss.cs" />
     <Compile Include="Assets\Script\Defeated.cs" />
     <Compile Include="Assets\Script\Enemy.cs" />
+    <Compile Include="Assets\Script\Explosion.cs" />
     <Compile Include="Assets\Script\Fireball.cs" />
     <Compile Include="Assets\Script\GetVolume.cs" />
     <Compile Include="Assets\Script\Global.cs" />

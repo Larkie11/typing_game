@@ -55,7 +55,7 @@ public class Enemy : MonoBehaviour {
         }
         foreach (string word in WordCheck.existingWords)
         {
-            Debug.Log(word);
+
         }
         child.color = Color.white;
         if (enemyText.text == "")
@@ -82,7 +82,6 @@ public class Enemy : MonoBehaviour {
     }
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        Debug.Log(collision.gameObject.tag);
         if (collision.gameObject.tag == "SpawnPlatform")
             grounded = true;
         else
@@ -92,15 +91,12 @@ public class Enemy : MonoBehaviour {
             sf2 = collision.gameObject.GetComponent<SurfaceEffector2D>();
     }
     // Update is called once per frame
-    void Update () {
-        Debug.Log(child.text);
+    void Update () { 
        
         if (input.text != "" && child.text.StartsWith(input.text))
         {
-            
             string modified = tempHolder.Insert(input.text.Length, rtCloseTag);
             test2 = modified.Insert(0, rtOpenTag);
-            Debug.Log(test2);
             if (test2 != "" && test2 != enemyText.text)
                 enemyText.text = test2;
         }
@@ -114,17 +110,6 @@ public class Enemy : MonoBehaviour {
             else
                 gameObject.GetComponent<SpriteRenderer>().flipX = true;
         }
-        // transform.position = Vector3.MoveTowards(transform.position, player.transform.position, speed * Time.deltaTime);
-        //char a = gameObject.GetComponentInChildren<Text>().text[0];
-       
-        //for(int i = 0; i < input.text.Length; i++)
-        //{
-        //    if (input.text[i] == gameObject.GetComponentInChildren<Text>().text[i])
-        //    {
-        //        gameObject.GetComponentInChildren<Text>().text
-        //    }
-        //}
-
         if (collided)
         {
             transform.localScale -= new Vector3(1, 1, 1) * Time.deltaTime * 10;

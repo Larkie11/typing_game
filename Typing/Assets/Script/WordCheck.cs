@@ -85,7 +85,7 @@ public class WordCheck : MonoBehaviour {
     GameObject player;
     float multiplerTimer = 0;
     int wordsCleared;
-   
+    bool nextWave = false;
     void Start()
     {
         blood = GameObject.FindGameObjectWithTag("Blood").GetComponent<Canvas>();
@@ -227,19 +227,22 @@ public class WordCheck : MonoBehaviour {
         if (cleared.GetComponent<Text>().fontSize < 40)
             cleared.GetComponent<Text>().fontSize += 1;
 
+        if (wordsCleared <= 0 && !nextWave)
+        {
+            foreach (GameObject go in spawnPoints)
+            {
+                GameObject explosion =
+                              Instantiate(Resources.Load("Explosion")) as GameObject;
+                explosion.transform.localPosition = go.transform.localPosition;
+                explosion.transform.SetParent(canvas.transform, false);
+                Destroy(go);
+            }
+            nextWave = true;
+        }
+
         if (cleared.GetComponent<Text>().fontSize >= 40)
         {
             Global.wordLimit = Global.wordLimitSet;
-            if (GoToScene.GetSceneName() == "1")
-            {
-                Global.difficultyLevel += 0.1f;
-                GoToScene.GoTo("2");
-            }
-            if (GoToScene.GetSceneName() == "2")
-            {
-                Global.difficultyLevel += 0.1f;
-                GoToScene.GoTo("3");
-            }
         }
     }
 
@@ -283,26 +286,9 @@ public class WordCheck : MonoBehaviour {
             {
                 int spawner = Random.Range(0, spawnPoints.Length);
                 Vector3 spawnLocation;
-                Debug.Log(spawnPoints[spawner].transform.position);
-
-                //if (spawnPoints[spawner].transform.position.x > 0)
-
-                //    xSpawn = spawnPoints[spawner].GetComponent<BoxCollider2D>().bounds.max.x * 2f;
-
-                //else
-                //    xSpawn = spawnPoints[spawner].GetComponent<BoxCollider2D>().bounds.min.x * 2f;
-
-                //if (spawnPoints[spawner].gameObject.GetComponentInParent<RectTransform>().transform.position.y < 0)
-                //{
-                //    spawnLocation = new Vector3(xSpawn, -spawnPoints[spawner].transform.position.y + spawnPoints[spawner].GetComponent<BoxCollider2D>().size.y * 2, 0);
-
-                //}
-                //else
-                //    spawnLocation = new Vector3(xSpawn, spawnPoints[spawner].transform.position.y + 200f, 0);
-
 
                 spawnLocation = spawnPoints[spawner].transform.localPosition;
-
+               
                 GameObject myRoadInstance;
                 if (monsterSpawn.Length <= 0)
                 {
@@ -373,7 +359,6 @@ public class WordCheck : MonoBehaviour {
                 for (int i = 0; i < found.Count; i++)
                 {
                     textAutocomplete.text = "<color=maroon>Auto Complete:</color> " + found[i];
-                    print(found[i]);
                 }
             }
         }

@@ -19,6 +19,7 @@ https://opengameart.org/content/background-5
 https://opengameart.org/content/underwater-fantasy
 https://opengameart.org/content/alien-ruins
 https://opengameart.org/content/several-scrolling-backgrounds-and-layerable-runners
+
 Credits to all this sources and artists
 http://www.dafont.com/aubrey.font
 http://pixaroma.com/24-game-buttons/
@@ -26,6 +27,12 @@ https://opengameart.org/content/2d-platformer-snow-pack
 https://opengameart.org/content/2d-platformer-jungle-pack
 https://opengameart.org/content/hollowed
 https://opengameart.org/content/sunset-temple-tiles
+https://opengameart.org/content/animated-particle-effects-1
+https://opengameart.org/content/chunky-explosion
+https://opengameart.org/content/more-explosions
+
+Sprites & Level 1 & 2 Platform
+http://www.gameart2d.com/freebies.html
 
 Zombie sound effect
 https://opengameart.org/content/zombies-sound-pack
