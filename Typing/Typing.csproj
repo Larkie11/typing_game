@@ -90,6 +90,7 @@
     <Compile Include="Assets\Script\SetScreen.cs" />
     <Compile Include="Assets\Script\SetVolume.cs" />
     <Compile Include="Assets\Script\ShowSentence.cs" />
+    <Compile Include="Assets\Script\TitleRotation.cs" />
     <Compile Include="Assets\Script\Won.cs" />
     <Compile Include="Assets\Script\WordCheck.cs" />
   </ItemGroup>

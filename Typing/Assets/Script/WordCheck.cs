@@ -88,6 +88,7 @@ public class WordCheck : MonoBehaviour {
     bool nextWave = false;
     void Start()
     {
+        Global.killAll = false;
         blood = GameObject.FindGameObjectWithTag("Blood").GetComponent<Canvas>();
         defeatCanvas.SetActive(false);
         defeatC = defeatCanvas.GetComponent<Canvas>();
@@ -103,7 +104,7 @@ public class WordCheck : MonoBehaviour {
         blood.enabled = false;
         timertospawn = 1f;
         trigger = false;
-        timer = 0.3f;
+        timer = 0f;
         waveStart = 3.5f;
         cooldownText = cooldownText.GetComponent<Text>();
         previousTimer = -1;
@@ -229,6 +230,7 @@ public class WordCheck : MonoBehaviour {
 
         if (wordsCleared <= 0 && !nextWave)
         {
+            Global.killAll = true;
             foreach (GameObject go in spawnPoints)
             {
                 GameObject explosion =
@@ -275,13 +277,14 @@ public class WordCheck : MonoBehaviour {
         else if (timertospawn <= 0 && Global.numberOfMonsters > 0 && waveStart <= -1)
         {
             if (Global.difficultyLevel < 2)
-                timertospawn = Random.Range(2.5f,3f);
+                timertospawn = Random.Range(1f,2f);
 
             else if (Global.difficultyLevel >= 2 && Global.difficultyLevel < 3)
-                timertospawn = Random.Range(1.5f,2f);
+                timertospawn = Random.Range(1f,2f);
 
             else
                 timertospawn = Random.Range(1f, 1.3f);
+
             if (GoToScene.GetSceneName() != "3")
             {
                 int spawner = Random.Range(0, spawnPoints.Length);

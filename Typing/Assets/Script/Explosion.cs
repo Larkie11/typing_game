@@ -21,7 +21,7 @@ public class Explosion : MonoBehaviour {
 
         foreach (GameObject go in monsters)
         {
-            Destroy(go);
+           // Destroy(go);
         }
     }
 

@@ -120,7 +120,7 @@ public class Enemy : MonoBehaviour {
             WordCheck.existingWords.Remove(child.text);
             child.text = "";
         }
-        if (child.text == "")
+        if (child.text == "" || Global.killAll)
         {
             died = true;
             anim.SetInteger("State",1);
