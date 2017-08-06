@@ -72,7 +72,6 @@ public class Boss : MonoBehaviour {
         {
             string modified = tempHolder.Insert(input.text.Length, rtCloseTag);
             string test2 = modified.Insert(0, rtOpenTag);
-            Debug.Log(test2);
             if (test2 != "" && test2 != clearText.text)
                 clearText.text = test2;
         }
@@ -99,13 +98,10 @@ public class Boss : MonoBehaviour {
                 timer = 2.5f;
             smaller = false;
         }
-        Debug.Log(ListOFWords.bossWords.Count);
-
         if (state == States.SpawnWord)
         {
             string randomText;
 
-            Debug.Log(ListOFWords.bossWords.Count);
             if (ListOFWords.bossWords.Count > 0 && text.text == "")
             {
                 if (Global.difficultyLevel < 2)
@@ -118,7 +114,6 @@ public class Boss : MonoBehaviour {
                     sentences.RandomSentence();
                     randomText = sentences.ReturnSentence();
                 }
-                Debug.Log(randomText);
                 text.text = randomText;
                 clearText.text = tempHolder = randomText;
                 state = States.Idle;

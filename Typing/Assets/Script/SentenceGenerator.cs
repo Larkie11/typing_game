@@ -41,7 +41,6 @@ public class SentenceGenerator : MonoBehaviour {
                 verbs1.Add(line);
             }
         }
-
         RandomSentence();
     }
 	
@@ -56,7 +55,7 @@ public class SentenceGenerator : MonoBehaviour {
 
     public void RandomSentence()
     {
-        randomSentence = starter1[Random.Range(0, starter1.Count)] + " " + adverbs1[Random.Range(0, adverbs1.Count)] + " " + verbs1[Random.Range(0, verbs1.Count)];
+            randomSentence = starter1[Random.Range(0, starter1.Count)] + " " + adverbs1[Random.Range(0, adverbs1.Count)] + " " + verbs1[Random.Range(0, verbs1.Count)];
     }
     // Update is called once per frame
     void Update () {

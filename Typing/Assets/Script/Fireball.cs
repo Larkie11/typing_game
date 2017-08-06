@@ -56,7 +56,6 @@ public class Fireball : MonoBehaviour {
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        Debug.Log(collision.gameObject.tag);
         Global.showBlood = true;
 
         if (!collided)
@@ -69,12 +68,10 @@ public class Fireball : MonoBehaviour {
     // Update is called once per frame
     void Update()
     {
-        Debug.Log(child.text);
         if (input.text != "" && child.text.StartsWith(input.text))
         { 
             string modified = tempHolder.Insert(input.text.Length, rtCloseTag);
             string test2 = modified.Insert(0, rtOpenTag);
-            Debug.Log(test2);
             if (test2 != "" && test2 != clearText.text)
                 clearText.text = test2;
         }

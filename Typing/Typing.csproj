@@ -82,6 +82,7 @@
     <Compile Include="Assets\Script\HealthBarBoss.cs" />
     <Compile Include="Assets\Script\ListOFWords.cs" />
     <Compile Include="Assets\Script\MenuCam.cs" />
+    <Compile Include="Assets\Script\ParticleHealth.cs" />
     <Compile Include="Assets\Script\PauseGame.cs" />
     <Compile Include="Assets\Script\SafetyLine.cs" />
     <Compile Include="Assets\Script\SelfRandom.cs" />

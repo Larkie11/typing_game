@@ -28,7 +28,6 @@ public class TitleRotation : MonoBehaviour {
         audio = GameObject.FindGameObjectWithTag("SFX").GetComponent<AudioSource>();
         myText = gameObject.GetComponent<Text>();
         myString = myText.text;
-        Debug.Log(myString);
         if (typingSound != null)
         {
             myText.text = "";

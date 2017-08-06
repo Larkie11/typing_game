@@ -12,11 +12,13 @@ public class WordCheck : MonoBehaviour {
     [SerializeField]
     InputField input;
     GameObject[] objects;
-    GameObject[] bossText;
+    GameObject bossText;
 
     [SerializeField]
     string[] monsterSpawn;
 
+    [SerializeField]
+    GameObject particleHealth;
 
     [SerializeField]
     SentenceGenerator sentences;
@@ -58,6 +60,8 @@ public class WordCheck : MonoBehaviour {
     AudioClip countdown1;
     [SerializeField]
     AudioClip countdown2;
+    [SerializeField]
+    AudioClip bossHurt;
 
     [SerializeField]
     AudioClip victory;
@@ -121,7 +125,7 @@ public class WordCheck : MonoBehaviour {
     // Update is called once per frame
     void Update()
     {
-
+        Global.health = Mathf.Clamp(Global.health, 0, 100);
         if (Input.GetKeyUp(KeyCode.Delete) || Input.GetKeyUp(KeyCode.Tab))
         {
             input.text = "";
@@ -158,7 +162,7 @@ public class WordCheck : MonoBehaviour {
         if (GoToScene.GetSceneName() == "3" && Global.bossHealth <= 0)
         {
             cleared.enabled = true;
-            cleared.text = "Defeated Boss!";
+            cleared.text = " ";
             if (cleared.GetComponent<Text>().fontSize < 40)
             {
                 cleared.GetComponent<Text>().fontSize += 1;
@@ -204,7 +208,7 @@ public class WordCheck : MonoBehaviour {
         objects = GameObject.FindGameObjectsWithTag("Monster");
 
         if (GoToScene.GetSceneName() == "3")
-            bossText = GameObject.FindGameObjectsWithTag("Boss");
+            bossText = GameObject.FindGameObjectWithTag("Boss");
 
         myText = input.text;
 
@@ -386,9 +390,7 @@ public class WordCheck : MonoBehaviour {
     }
     void CheckBossWord()
     {
-        foreach (GameObject o in bossText)
-        {
-            if (o.GetComponentInChildren<Text>().text == input.text && o.GetComponentInChildren<Text>().text != "")
+         if (bossText.GetComponentInChildren<Text>().text == input.text && bossText.GetComponentInChildren<Text>().text != "")
             {
                 if (!trigger)
                 {
@@ -398,25 +400,25 @@ public class WordCheck : MonoBehaviour {
                 if (trigger)
                 {
                     timer -= Time.fixedDeltaTime;
-                    o.GetComponentInChildren<Text>().color = Color.blue;
-                    Global.wordsCleared--;
+                bossText.GetComponentInChildren<Text>().color = Color.blue;
 
                     if (timer <= 0)
                     {
-                        o.GetComponentInChildren<Text>().text = "";
+                        bossText.GetComponentInChildren<Text>().text = "";
                         Global.bossHealth -= 20;
                         trigger = false;
                         input.text = "";
                         timer = 0.1f;
                         Global.health += 10;
-                    }
+                        Instantiate(Resources.Load("Gain health"), new Vector3(bossText.transform.localPosition.x, 0, -56), Quaternion.identity);
+                        audio.PlayOneShot(bossHurt);
                 }
             }
-            else
-            {
-                o.GetComponentInChildren<Text>().color = Color.white;
-            }
         }
+        else
+            {
+                bossText.GetComponentInChildren<Text>().color = Color.white;
+            }
     }
 
     void CheckWord()

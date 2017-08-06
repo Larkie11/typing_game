@@ -55,118 +55,63 @@ public class ListOFWords : MonoBehaviour {
             {
                 if (GoToScene.GetSceneName() == "1")
                 {
-                    if (n == lowestWordCount)
+                    if (n >= 1 && n <= 2)
                     {
-                        if (Global.allowSymbols)
+                        if (!Global.allowUpperCase)
                         {
-                            if (!Global.allowUpperCase)
-                            {
-                                if (word == word.ToLower())
-                                {
-                                    words.Add(word);
-                                }
-                            }
-                            else
+                            if (word == word.ToLower())
                             {
                                 words.Add(word);
-                                for (int i = 0; i < n; i++)
-                                {
-                                    int random = Random.Range(0, 100);
-                                    if (random < 20)
-                                        sb[i] = char.ToUpper(word[i]);
-                                }
-                                words.Add(sb.ToString());
                             }
                         }
                         else
                         {
-                            if (r.IsMatch(word))
+                            words.Add(word);
+                            for (int i = 0; i < n; i++)
                             {
-                                if (!Global.allowUpperCase)
-                                {
-                                    if (word == word.ToLower())
-                                    {
-                                        words.Add(word);
-                                    }
-                                }
-                                else
-                                {
-                                    words.Add(word);
-                                    for (int i = 0; i < n; i++)
-                                    {
-                                        int random = Random.Range(0, 100);
-                                        if (random < 20)
-                                            sb[i] = char.ToUpper(word[i]);
-                                    }
-                                    words.Add(sb.ToString());
-
-                                }
+                                int random = Random.Range(0, 100);
+                                if (random < 20)
+                                    sb[i] = char.ToUpper(word[i]);
                             }
+                            words.Add(sb.ToString());
                         }
                     }
+
                 }
 
                 if (GoToScene.GetSceneName() == "2")
                 {
-                    if (n >= 2 && n <= 4)
+                    if (n >= 2 && n <= 5)
                     {
-                        if (Global.allowSymbols)
+                        if (!Global.allowUpperCase)
                         {
-                            if (!Global.allowUpperCase)
+                            if (word == word.ToLower())
                             {
-                                if (word == word.ToLower())
-                                {
-                                    words.Add(word);
-                                }
-                            }
-                            else
-                            {
-                                for (int i = 0; i < n; i++)
-                                {
-                                    int random = Random.Range(0, 100);
-                                    if (random < 20)
-                                        sb[i] = char.ToUpper(word[i]);
-                                }
-                                words.Add(sb.ToString());
+                                words.Add(word);
                             }
                         }
                         else
                         {
-                            if (r.IsMatch(word))
+                            for (int i = 0; i < n; i++)
                             {
-                                if (!Global.allowUpperCase)
-                                {
-                                    if (word == word.ToLower())
-                                    {
-                                        words.Add(word);
-                                    }
-                                }
-                                else
-                                {
-                                    for (int i = 0; i < n; i++)
-                                    {
-                                        int random = Random.Range(0, 100);
-                                        if (random < 20)
-                                            sb[i] = char.ToUpper(word[i]);
-                                    }
-                                    words.Add(sb.ToString());
-                                }
+                                int random = Random.Range(0, 100);
+                                if (random < 20)
+                                    sb[i] = char.ToUpper(word[i]);
                             }
+                            words.Add(sb.ToString());
                         }
                     }
                 }
+                
                 if (GoToScene.GetSceneName() == "3")
                 {
-                    if (n >= 4 && n <= 5)
+                    if (n >= 6 && n <= 8)
                         bossWords.Add(word);
-
-                    if (Global.allowSymbols)
+                    if (n >= 5 && n <= 7)
                     {
                         if (!Global.allowUpperCase)
                         {
                             words.Add(word);
-                            if (n >= 3 && n <= 4)
-                                bossWords.Add(word);
                         }
                         else if (Global.allowUpperCase)
                         {
@@ -179,32 +124,6 @@ public class ListOFWords : MonoBehaviour {
                                         sb[i] = char.ToUpper(word[i]);
                                 }
                                 words.Add(sb.ToString());
-                            }
-
-                        }
-
-                    }
-                    else
-                    {
-                        if (r.IsMatch(word))
-                        {
-                            if (!Global.allowUpperCase)
-                            {
-                                words.Add(word);
-
-                            }
-                            else
-                            {
-                                words.Add(word);
-                                {
-                                    for (int i = 0; i < n; i++)
-                                    {
-                                        int random = Random.Range(0, 100);
-                                        if (random < 20)
-                                            sb[i] = char.ToUpper(word[i]);
-                                    }
-                                    words.Add(sb.ToString());
-                                }
                             }
                         }
                     }
@@ -262,7 +181,7 @@ public class ListOFWords : MonoBehaviour {
                 }
                 if (GoToScene.GetSceneName() == "3")
                 {
-                    if (n >= 5 && n <= 7)
+                    if (n >= 6 && n <= 8)
                     {
                         if (!Global.allowUpperCase)
                         {
@@ -319,7 +238,7 @@ public class ListOFWords : MonoBehaviour {
 
                 if (GoToScene.GetSceneName() == "2")
                 {
-                    if (n >= 7 && n <= 9)
+                    if (n >= 6 && n <= 9)
                     {
                         if (!Global.allowUpperCase)
                         {
