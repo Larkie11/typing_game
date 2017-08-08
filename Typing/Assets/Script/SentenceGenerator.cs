@@ -14,32 +14,22 @@ public class SentenceGenerator : MonoBehaviour {
 
     // Use this for initialization
     void Start () {
+        TextAsset starter = Resources.Load("starter1") as TextAsset;
+        string[] starterContent = starter.text.Split(new[] { "\r\n", "\r", "\n" }, System.StringSplitOptions.None);
+        starter1.AddRange(starterContent);
 
-        using (StreamReader sr = new StreamReader(Application.streamingAssetsPath + "/starter1.txt"))
-        {
-            string line; // this is the buffer for the content from your file
-            while ((line = sr.ReadLine()) != null)
-            {
-                starter1.Add(line);
-            }
-        }
+        TextAsset adverbs = Resources.Load("adverbs1") as TextAsset;
+        string[] adverbsContent = adverbs.text.Split(new[] { "\r\n", "\r", "\n" }, System.StringSplitOptions.None);
+        adverbs1.AddRange(adverbsContent);
 
-        using (StreamReader sr = new StreamReader(Application.streamingAssetsPath + "/adverbs1.txt"))
-        {
-            string line; // this is the buffer for the content from your file
-            while ((line = sr.ReadLine()) != null)
-            {
-                adverbs1.Add(line);
-            }
-        }
+        TextAsset verbs = Resources.Load("verbs1") as TextAsset;
+        string[] verbsContent = verbs.text.Split(new[] { "\r\n", "\r", "\n" }, System.StringSplitOptions.None);
+        verbs1.AddRange(verbsContent);
 
-        using (StreamReader sr = new StreamReader(Application.streamingAssetsPath + "/verbs1.txt"))
+        Debug.Log(starter.text);
+        foreach(string i in starter1)
         {
-            string line; // this is the buffer for the content from your file
-            while ((line = sr.ReadLine()) != null)
-            {
-                verbs1.Add(line);
-            }
+            Debug.Log("starter1_" + i);
         }
         RandomSentence();
     }

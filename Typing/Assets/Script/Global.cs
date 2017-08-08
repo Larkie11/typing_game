@@ -31,6 +31,7 @@ public class Global : MonoBehaviour {
     }
     private void Start()
     {
+        if(PlayerPrefs.HasKey("WordLimit"))
         wordLimit = PlayerPrefs.GetInt("WordLimit");
     }
     public void SetDifficulty(int level)

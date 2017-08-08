@@ -17,8 +17,8 @@ public class ListOFWords : MonoBehaviour {
     {
 
         Regex r = new Regex("^[a-zA-Z0-9]*$");
-        lowestWordCount = loadedWords[0].Length;
-
+        if (loadedWords.Count >= 1)
+            lowestWordCount = loadedWords[0].Length;
         foreach (string word in loadedWords)
         {
             int n = word.Length;
@@ -268,46 +268,15 @@ public class ListOFWords : MonoBehaviour {
             }
         }
     }
-    // Use this for initialization
-    IEnumerator loadStreamingAsset(string fileName)
-    {
-        string filePath = System.IO.Path.Combine(Application.streamingAssetsPath, fileName);
-
-        string result;
-        if (filePath.Contains("://") || filePath.Contains(":///"))
-        {
-            WWW www = new WWW(filePath);
-            yield return www;
-            result = www.text;
-            Debug.Log(result);
-            if (Global.readFile == false)
-            {
-                using (StreamReader sr = new StreamReader(Application.streamingAssetsPath + www.text))
-                {
-                    string line; // this is the buffer for the content from your file
-                    while ((line = sr.ReadLine()) != null)
-                    {
-                        loadedWords.Add(line);
-                    }
-                }
-                Global.readFile = true;
-            }
-        }
-        else
-        {
-            result = System.IO.File.ReadAllText(filePath);
-            string[] fileContent = System.IO.File.ReadAllLines(filePath);
-            loadedWords.AddRange(fileContent);
-        }
-    }
     void Start()
     {
         words.Clear();
         bossWords.Clear();
 
+        TextAsset bindata = Resources.Load("English") as TextAsset;
+        string [] fileContent = bindata.text.Split(new[] { "\r\n", "\r", "\n" }, System.StringSplitOptions.None);
+        loadedWords.AddRange(fileContent);
 
-
-        StartCoroutine(loadStreamingAsset("English.txt"));
         if (PlayerPrefs.GetInt("AllowUpper") == 0)
             Global.allowUpperCase = true;
         else

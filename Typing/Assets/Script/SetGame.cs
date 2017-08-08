@@ -36,6 +36,8 @@ public class SetGame : MonoBehaviour {
                 else
                     thisToggle.isOn = false;
         }
+        if(Global.wordLimit == 0)
+        Global.wordLimit = (int)thisSlider.minValue;
     }
 	
 	// Update is called once per frame
