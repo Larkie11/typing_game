@@ -92,6 +92,11 @@ public class WordCheck : MonoBehaviour {
     bool nextWave = false;
     void Start()
     {
+        if (GoToScene.GetSceneName() == "1")
+        {
+            Global.health = 100;
+            Global.score = 0;
+        }
         Global.killAll = false;
         blood = GameObject.FindGameObjectWithTag("Blood").GetComponent<Canvas>();
         defeatCanvas.SetActive(false);

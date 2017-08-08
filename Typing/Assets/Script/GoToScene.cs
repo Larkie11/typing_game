@@ -24,6 +24,11 @@ public class GoToScene : MonoBehaviour {
     }
     public void GoTo2(string SceneName)
     {
+        if (SceneName == "Menu")
+        {
+            Global.score = 0;
+            Global.health = 100;
+        }
         SceneManager.LoadScene(SceneName);
     }
 }
