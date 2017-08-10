@@ -292,7 +292,7 @@ public class WordCheck : MonoBehaviour {
                 timertospawn = Random.Range(1f,2f);
 
             else
-                timertospawn = Random.Range(1f, 1.3f);
+                timertospawn = Random.Range(1.3f, 1.7f);
 
             if (GoToScene.GetSceneName() != "3")
             {
@@ -410,12 +410,25 @@ public class WordCheck : MonoBehaviour {
                     if (timer <= 0)
                     {
                         bossText.GetComponentInChildren<Text>().text = "";
-                        Global.bossHealth -= 20;
                         trigger = false;
                         input.text = "";
                         timer = 0.1f;
-                        Global.health += 10;
-                        Instantiate(Resources.Load("Gain health"), new Vector3(bossText.transform.localPosition.x, 0, -56), Quaternion.identity);
+                    if (GoToScene.GetSceneName() == "1")
+                    {
+                        Global.health += 3;
+                        Global.bossHealth -= 3;
+                    }
+                    if (GoToScene.GetSceneName() == "2")
+                    {
+                        Global.health += 5;
+                        Global.bossHealth -= 7;
+                    }
+                    if (GoToScene.GetSceneName() == "3")
+                    {
+                        Global.health += 5;
+                        Global.bossHealth -= 10;
+                    }
+                    Instantiate(Resources.Load("Gain health"), new Vector3(bossText.transform.localPosition.x, 0, -56), Quaternion.identity);
                         audio.PlayOneShot(bossHurt);
                 }
             }

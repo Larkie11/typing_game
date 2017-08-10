@@ -1,11 +1,13 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
 public class GoToScene : MonoBehaviour {
-
-	// Use this for initialization
-	void Start () {
+    [SerializeField]
+    InputField username;
+    // Use this for initialization
+    void Start () {
 	
 	}
 	
@@ -24,6 +26,9 @@ public class GoToScene : MonoBehaviour {
     }
     public void GoTo2(string SceneName)
     {
+        if(GetSceneName() == "3")
+        Highscores.AddNewHighscore(username.text, Global.score);
+
         if (SceneName == "Menu")
         {
             Global.score = 0;

@@ -21,6 +21,8 @@ public class Defeated : MonoBehaviour {
         Global.health = 100;
         Global.wordLimit = Global.wordLimitSet;
         Global.bossHealth = 300;
+        if(Global.score >= 100)
+        Global.score -= 100;
         Time.timeScale = 1;
     }
     public void BackToMenu()
