@@ -113,7 +113,6 @@ public class Boss : MonoBehaviour {
                 {
                     sentences.RandomSentence();
                     randomText = sentences.ReturnSentence();
-                    Debug.Log(randomText);
                 }
                 text.text = randomText;
                 clearText.text = tempHolder = randomText;

@@ -36,8 +36,8 @@ public class SetGame : MonoBehaviour {
                 else
                     thisToggle.isOn = false;
         }
-        if(!PlayerPrefs.HasKey("WordLimit"))
-        Global.wordLimit = (int)thisSlider.value;
+        if(Global.wordLimit == 0)
+        Global.wordLimit = (int)thisSlider.minValue;
     }
 	
 	// Update is called once per frame

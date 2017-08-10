@@ -25,6 +25,12 @@ public class SentenceGenerator : MonoBehaviour {
         TextAsset verbs = Resources.Load("verbs1") as TextAsset;
         string[] verbsContent = verbs.text.Split(new[] { "\r\n", "\r", "\n" }, System.StringSplitOptions.None);
         verbs1.AddRange(verbsContent);
+
+        Debug.Log(starter.text);
+        foreach(string i in starter1)
+        {
+            Debug.Log("starter1_" + i);
+        }
         RandomSentence();
     }
 	

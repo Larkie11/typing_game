@@ -36,8 +36,8 @@ public class Enemy : MonoBehaviour {
         player = GameObject.FindGameObjectWithTag("Player");
         anim = gameObject.GetComponent<Animator>();
         audio = GameObject.FindGameObjectWithTag("SFX").GetComponent<AudioSource>();
-        if(GoToScene.GetSceneName() != "Menu")
         input = GameObject.FindGameObjectWithTag("Input").GetComponent<InputField>();
+        speed = Random.Range(13, 20);
         child = transform.GetChild(0).GetComponentInChildren<Text>();
         enemyText = transform.GetChild(0).GetChild(0).GetComponent<Text>();
 
@@ -53,7 +53,10 @@ public class Enemy : MonoBehaviour {
             ListOFWords.words.RemoveAt(random);
             WordCheck.existingWords.Add(child.text);
         }
+        foreach (string word in WordCheck.existingWords)
+        {
 
+        }
         child.color = Color.white;
         if (enemyText.text == "")
             enemyText.text = child.text;
@@ -87,53 +90,50 @@ public class Enemy : MonoBehaviour {
             sf2 = collision.gameObject.GetComponent<SurfaceEffector2D>();
     }
     // Update is called once per frame
-    void Update()
-    {
-        if (GoToScene.GetSceneName() != "Menu")
+    void Update () { 
+       
+        if (input.text != "" && child.text.StartsWith(input.text))
         {
-            if (input.text != "" && child.text.StartsWith(input.text))
-            {
-                string modified = tempHolder.Insert(input.text.Length, rtCloseTag);
-                test2 = modified.Insert(0, rtOpenTag);
-                if (test2 != "" && test2 != enemyText.text)
-                    enemyText.text = test2;
-            }
-            if (input.text == "")
-                enemyText.text = child.text;
+            string modified = tempHolder.Insert(input.text.Length, rtCloseTag);
+            test2 = modified.Insert(0, rtOpenTag);
+            if (test2 != "" && test2 != enemyText.text)
+                enemyText.text = test2;
+        }
+        if (input.text == "")
+            enemyText.text = child.text;
 
-            if (sf2 != null)
+        if (sf2 != null)
+        {
+            if ( sf2.speed > 0)
+                gameObject.GetComponent<SpriteRenderer>().flipX = false;
+            else
+                gameObject.GetComponent<SpriteRenderer>().flipX = true;
+        }
+        if (collided)
+        {
+            transform.localScale -= new Vector3(1, 1, 1) * Time.deltaTime * 10;
+            if (transform.localScale.x <= 0)
             {
-                if (sf2.speed > 0)
-                    gameObject.GetComponent<SpriteRenderer>().flipX = false;
-                else
-                    gameObject.GetComponent<SpriteRenderer>().flipX = true;
+                Destroy(gameObject);
             }
-            if (collided)
+            WordCheck.existingWords.Remove(child.text);
+            child.text = "";
+        }
+        if (child.text == "" || Global.killAll)
+        {
+            died = true;
+            anim.SetInteger("State",1);
+            if(Global.health <= 0)
+                Destroy(gameObject);
+            if (!isPlaying)
             {
-                transform.localScale -= new Vector3(1, 1, 1) * Time.deltaTime * 10;
-                if (transform.localScale.x <= 0)
-                {
-                    Destroy(gameObject);
-                }
-                WordCheck.existingWords.Remove(child.text);
-                child.text = "";
+                Global.multiplier = 2;
+                audio.PlayOneShot(dead);
+                isPlaying = true;
             }
-            if (child.text == "" || Global.killAll)
+            if (anim.GetCurrentAnimatorStateInfo(0).IsName("Empty"))
             {
-                died = true;
-                anim.SetInteger("State", 1);
-                if (Global.health <= 0)
-                    Destroy(gameObject);
-                if (!isPlaying)
-                {
-                    Global.multiplier = 2;
-                    audio.PlayOneShot(dead);
-                    isPlaying = true;
-                }
-                if (anim.GetCurrentAnimatorStateInfo(0).IsName("Empty"))
-                {
-                    Destroy(gameObject);
-                }
+               Destroy(gameObject);
             }
         }
     }

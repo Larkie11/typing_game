@@ -25,8 +25,8 @@ public class Fireball : MonoBehaviour {
     string rtCloseTag = "</color>"; //Rich text closing tag
 
     void Start () {
-        child = transform.GetChild(1).GetComponentInChildren<Text>();
-        clearText = transform.GetChild(1).GetChild(0).GetComponent<Text>();
+        child = transform.GetChild(0).GetComponentInChildren<Text>();
+        clearText = transform.GetChild(0).GetChild(0).GetComponent<Text>();
 
         if (ListOFWords.words.Count > 0)
         {
@@ -50,9 +50,9 @@ public class Fireball : MonoBehaviour {
             moveSpeed = 10;
 
         else if (Global.difficultyLevel >= 2 && Global.difficultyLevel < 3)
-            moveSpeed = 13;
+            moveSpeed = 24;
         else
-            moveSpeed = 17;
+            moveSpeed = 30;
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
