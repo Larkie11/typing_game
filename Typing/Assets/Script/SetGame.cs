@@ -12,6 +12,7 @@ public class SetGame : MonoBehaviour {
     string TypeOfToggle;
 	// Use this for initialization
 	void Start () {
+
         if (gameObject.GetComponent<Slider>() != null)
         {
             thisSlider = gameObject.GetComponent<Slider>();
@@ -36,8 +37,6 @@ public class SetGame : MonoBehaviour {
                 else
                     thisToggle.isOn = false;
         }
-        if(Global.wordLimit == 0)
-        Global.wordLimit = (int)thisSlider.minValue;
     }
 	
 	// Update is called once per frame

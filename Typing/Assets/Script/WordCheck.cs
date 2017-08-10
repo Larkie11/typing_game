@@ -121,6 +121,7 @@ public class WordCheck : MonoBehaviour {
         bgm = GameObject.FindGameObjectWithTag("Audio").GetComponent<AudioSource>();
         player = GameObject.FindGameObjectWithTag("Player");
         playCountdown2 = false;
+        Global.wordLimit = PlayerPrefs.GetInt("WordLimit");
         wordsCleared = Global.wordLimit;
         Global.numberOfMonsters = Global.wordLimit;
         cleared.enabled = false;

@@ -16,7 +16,7 @@ public class Global : MonoBehaviour {
     public static int bossHealth = 150;
     public static float maxBossHealth;
     public static int wordLimitSet;
-    public static int wordLimit = 5;
+    public static int wordLimit = 15;
     public static bool allowSymbols = true;
     public static bool readFile = false;
     public static bool allowUpperCase = false;
@@ -31,8 +31,11 @@ public class Global : MonoBehaviour {
     }
     private void Start()
     {
-        if(PlayerPrefs.HasKey("WordLimit"))
-        wordLimit = PlayerPrefs.GetInt("WordLimit");
+        if (PlayerPrefs.HasKey("WordLimit"))
+            wordLimit = PlayerPrefs.GetInt("WordLimit");
+        else
+            PlayerPrefs.SetInt("WordLimit", wordLimit);
+
     }
     public void SetDifficulty(int level)
     {
