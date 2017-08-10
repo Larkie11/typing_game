@@ -50,9 +50,9 @@ public class Fireball : MonoBehaviour {
             moveSpeed = 10;
 
         else if (Global.difficultyLevel >= 2 && Global.difficultyLevel < 3)
-            moveSpeed = 24;
+            moveSpeed = 13;
         else
-            moveSpeed = 30;
+            moveSpeed = 15;
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {

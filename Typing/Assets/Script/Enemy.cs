@@ -53,10 +53,7 @@ public class Enemy : MonoBehaviour {
             ListOFWords.words.RemoveAt(random);
             WordCheck.existingWords.Add(child.text);
         }
-        foreach (string word in WordCheck.existingWords)
-        {
-
-        }
+      
         child.color = Color.white;
         if (enemyText.text == "")
             enemyText.text = child.text;
