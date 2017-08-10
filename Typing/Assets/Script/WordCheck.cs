@@ -411,11 +411,20 @@ public class WordCheck : MonoBehaviour {
                     if (timer <= 0)
                     {
                         bossText.GetComponentInChildren<Text>().text = "";
-                        Global.bossHealth -= 20;
-                        trigger = false;
+
+                    if (GoToScene.GetSceneName() == "1")
+                    {
+                        Global.bossHealth -= 10;
+                        Global.health += 5;
+                    }
+                   else
+                    {
+                        Global.bossHealth -= 10;
+                        Global.health += 3;
+                    }
+                    trigger = false;
                         input.text = "";
                         timer = 0.1f;
-                        Global.health += 10;
                         Instantiate(Resources.Load("Gain health"), new Vector3(bossText.transform.localPosition.x, 0, -56), Quaternion.identity);
                         audio.PlayOneShot(bossHurt);
                 }
